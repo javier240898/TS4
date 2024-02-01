@@ -1,0 +1,66 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="TS4_InscripcionWebinar">
+    <aura:attribute name="Suscriptor" type="Map" default="{}"/>
+    <aura:attribute name="GuardadoExitoso" type="Boolean" default="false"/>
+    <aura:attribute name="webinarsList" type="String[]" default="[]" />
+    <aura:attribute name="mensaje" type="String" default= "" />
+
+    <aura:handler name='init' value='{!this}' action='{!c.doInit}' />
+
+    <aura:if isTrue="{!v.GuardadoExitoso==false}">
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-1 slds-large-size--1-of-2" style="padding-top:30px;padding-bottom:30px;">
+                <div class="slds-grid slds-wrap">
+                    <div class="slds-col slds-size_1-of-6 slds-large-size--1-of-3"></div>
+                    <div class="slds-col slds-size_4-of-6 slds-large-size--1-of-3" style="padding-top:30px;">
+                        <img src="https://i.postimg.cc/rpHv5LFX/image.png"></img>
+                    </div>
+                    <div class="slds-col slds-size_1-of-6 slds-large-size--1-of-3"></div>
+                    <div class="slds-col slds-size_1-of-1" style="padding-top:30px;">
+                        <h2 style="text-align:center; font-size:24px">Registro</h2>
+                    </div>
+                    <div class="slds-col slds-size_1-of-6 slds-large-size--1-of-3"></div>
+                    <div class="slds-col slds-size_4-of-6 slds-large-size--1-of-3">
+                        <div class="slds-grid slds-wrap" >                
+                            <div class="slds-col slds-size_1-of-1">
+                                <lightning:input aura:id="formInscripcion" type="text" name="Nombre" label="Nombre" required="true" value="{!v.Suscriptor.Nombre}" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1">
+                                <lightning:input aura:id="formInscripcion" type="text" name="Apellido" label="Apellido" required="true" value="{!v.Suscriptor.Apellido}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1">
+                                <lightning:input aura:id="formInscripcion" type="email" name="Email" label="Email" required="true" value="{!v.Suscriptor.Email}" />
+                            </div>
+                            <div class="slds-col slds-size_1-of-1">
+                                <lightning:input aura:id="formInscripcion" type="text" name="Compania" label="Compañia" required="true" value="{!v.Suscriptor.Compania}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1">
+                                    <lightning:select name="selectWebinar"  aura:id = "selectWebinar" label="Curso de tu interés" required="true" value="{!v.Suscriptor.Webinar}" onchange="{!c.onChangeWebinar}">
+                                        <aura:iteration items="{!v.webinarsList}" var="webinar">
+                                            <option text="{!webinar}" value="{!webinar}"/>
+                                        </aura:iteration>
+                                    </lightning:select>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1" style="padding-top:15px;">
+                                <center><lightning:button variant="brand" label="¡Registrarme!" title="Registrar" onclick="{! c.handleSave }"/></center>
+                                <center style="color:red;">{!v.mensaje}</center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-6 slds-large-size--1-of-3"></div>
+                </div>
+            </div>
+            
+            <div class="slds-col slds-large-size--1-of-2 noShow">
+                <img src="http://www.ts4.mx/images/2a.jpg" style="height:100%; object-fit: cover; max-height:800px;"></img>
+            </div>
+        </div>
+                <aura:set attribute="else">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-1" style="padding-top:30px;">
+                            <h2 style="text-align:center; font-size:24px">Muchas gracias por tu registro, uno de nuestros asesores te contactará para dar seguimiento a tu interés.</h2>
+                            <!--p style="text-align:center">En breve recibirás un correo de confirmación.¡Te esperamos!</p-->
+                        </div>
+                    </div>
+                </aura:set>
+            </aura:if>
+</aura:component>

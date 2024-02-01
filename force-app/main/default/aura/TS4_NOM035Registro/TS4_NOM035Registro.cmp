@@ -1,0 +1,117 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="TS4_NOM035RegistroController">
+    <aura:attribute name="Suscriptor" type="Map" default="{}"/>
+    <aura:attribute name="GuardadoExitoso" type="Boolean" default="false"/>
+    <aura:attribute name="mensaje" type="String" default= "" />
+    
+    <aura:if isTrue="{!v.GuardadoExitoso == true}">
+        <div class="slds-grid slds-wrap">
+            <div class="slds-col slds-size_1-of-1" style="padding-top:30px;">
+                <h2 style="text-align:center; font-size:24px">Registro Exitoso!</h2>
+                <p style="text-align:center">¡Te esperamos!</p>
+            </div>
+        </div>
+        <aura:set attribute="else">
+            <div class="slds-grid slds-wrap slds-p-around_medium" style="background: white">
+            <div class="slds-col slds-size_1-of-1 slds-large-size--1-of-1" style="padding-bottom:30px;">
+                <div class="slds-grid slds-wrap slds-box">
+                    <div class="slds-col slds-size_1-of-6 slds-large-size--1-of-3"></div>
+                    <div class="slds-col slds-size_4-of-6 slds-large-size--1-of-3" style="padding-top:5px;">
+                        <img src="https://mcusercontent.com/e04119e230388680f9e703d37/images/a048f3ba-2fe5-4e0f-bd42-ef811371160f.jpeg" width="700" height="900"></img>
+                    </div>
+                    <div class="slds-col slds-size_1-of-6 slds-large-size--1-of-3"></div>
+                    <div class="slds-col slds-size_1-of-1" style="padding-top:20px;">
+                        <h2 style="text-align:center; font-size:21px; color:black">¿Tu empresa está lista para recibir la inspección de <br/>la Secretaría del Trabajo?</h2>
+                        <h2 style="text-align:center; font-size:23px; color:black;font-weight: bold;">NOM-035-STPS</h2>
+                        <h2 style="text-align:center; font-size:21px; color:black">Lo hacemos por ti.</h2>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-m-top_small slds-align_absolute-center slds-p-left_x-large">
+                        <div class="slds-col slds-size_1-of-1 slds-m-top_small">
+                            <div class="slds-media">
+                                <div class="slds-media__figure">
+                                    <lightning:icon style="background:#000000" iconName="action:new_group" title="Action"/>
+                                </div>
+                                <div class="slds-col slds-size_5-of-12">
+                                    <div class="slds-media__body">
+                                        <h2 style="text-align:center; font-size:22px; color:black;font-weight: bold">SENSIBILIZACIÓN</h2>
+                                        <h2 style="text-align:center; font-size:21px; color:black">Te ayudamos a que tus colaboradores participen.</h2>
+                                    </div>
+                                </div>
+                                <div class="slds-media__figure slds-p-left_x-large">
+                                    <lightning:icon style="background:#000000" iconName="action:defer" title="Actionn"/>
+                                </div>
+                                <div class="slds-col slds-size_5-of-12">
+                                    <div class="slds-media__body">
+                                        <h2 style="text-align:center; font-size:22px; color:black;font-weight: bold">APLICACIÓN EN LINEA</h2>
+                                        <h2 style="text-align:center; font-size:21px; color:black">Optimiza el tiempo.</h2>
+                                    </div>
+                                </div>
+                            </div>	
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1 slds-m-top_small slds-align_absolute-center slds-p-left_x-large">
+                        <div class="slds-col slds-size_1-of-1 slds-m-top_small">
+                            <div class="slds-media">
+                                <div class="slds-media__figure">
+                                    <lightning:icon style="background:#000000" iconName="action:web_link" title="Action"/>
+                                </div>
+                                <div class="slds-col slds-size_5-of-12">
+                                    <div class="slds-media__body">
+                                        <h2 style="text-align:center; font-size:22px; color:black;font-weight: bold">RESULTADOS DE IMPACTO CON TECNOLOGÍA SALESFORCE</h2>
+                                    </div>
+                                </div>
+                                <div class="slds-media__figure slds-p-left_x-large">
+                                    <lightning:icon style="background:#000000" iconName="action:new_task" title="Actionn"/>
+                                </div>
+                                <div class="slds-col slds-size_5-of-12">
+                                    <div class="slds-media__body">
+                                        <h2 style="text-align:center; font-size:22px; color:black;font-weight: bold">POLÍTICA Y PLAN DE MEJORA</h2>
+                                        <h2 style="text-align:center; font-size:21px; color:black">La creamos desde cero, o te ayudamos en la revisión o mejora.</h2>
+                                    </div>
+                                </div>
+                            </div>	
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-1" style="padding-top:20px;">
+                        <h2 style="text-align:center; font-size:21px; color:black;font-weight: bold">Combina la mejor tecnología con la experiencia de <br/> profesionales en Desarrollo Organizacional y Change <br/> Management</h2>
+                    </div>
+                </div>
+                <div class="slds-grid slds-wrap " style="padding-top:15px;">
+                    <div class="slds-col slds-size_1-of-6 slds-large-size--1-of-3"></div>
+                    <div class="slds-col slds-size_4-of-6 slds-large-size--1-of-3">
+                        <div class="slds-grid slds-wrap" >   
+                            <div class="slds-col slds-size_1-of-1">
+                                <lightning:input size="13px" aura:id="formInscripcion" type="email" name="Email" label="Email" required="true" value="{!v.Suscriptor.Email}"/>
+                            </div>             
+                            <div class="slds-col slds-size_1-of-1">
+                                <lightning:input aura:id="formInscripcion" type="text" name="Nombre" label="Nombre(s)" value="{!v.Suscriptor.Nombre}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1">
+                                <lightning:input aura:id="formInscripcion" type="text" name="Apellido" label="Apellido(s)" value="{!v.Suscriptor.Apellido}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1">
+                                <lightning:input aura:id="formInscripcion" type="tel" name="telefonoContact" label="Teléfono de contacto" value="{!v.Suscriptor.Telefono}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1">
+                                <lightning:input name="Compañia" label="Compañia" required="true" value="{!v.Suscriptor.Compania}"/>
+                            </div>
+                            <div class="slds-col slds-size_1-of-1" style="padding-top:15px;">
+                                <lightning:button class="estiloBoton" label="Enviar" title="Registrar" onclick="{! c.handleSave }"/>
+                                <center style="color:red;">{!v.mensaje}</center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slds-col slds-size_1-of-6 slds-large-size--1-of-3"></div>
+                    <div class="slds-col slds-size_1-of-1 slds-align_absolute-center" style="padding-top:5px;">
+                        <div class="slds-media__figure">
+                            <lightning:icon style="background:#000000" iconName="action:web_link" title="Action" onclick="{! c.addressLinkedin }"/>
+                        </div>
+                        <div class="slds-media__figure">
+                            <lightning:icon style="background:#000000" iconName="action:share_link" title="Action" onclick="{! c.addressSalesforce }"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </aura:set>
+    </aura:if>
+</aura:component>

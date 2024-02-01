@@ -1,0 +1,20 @@
+<apex:page showHeader="false" sidebar="false" >
+    
+    <apex:includeLightning />   
+    <div id="lightning" />
+    
+    <script>
+    //Tell your Visualforce page to use ExposeVF Lightning app
+    $Lightning.use("c:TS4_NOM035RegistroApp", function() {
+        // Write a function that creates the component on the page
+        $Lightning.createComponent("c:TS4_NOM035Registro",
+                                   {
+                                       "recordId" : "{!$CurrentPage.parameters.id}"
+                                   },
+                                   "lightning",
+                                   function(cmp) {
+                                       // do some stuff
+                                   });
+    });
+    </script>
+</apex:page>

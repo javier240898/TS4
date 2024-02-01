@@ -1,0 +1,3 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" >
+	<img src="{!$Resource.TablaNom035Small}" style="width:500px; height:auto; padding-top:10px;" />
+</aura:component>

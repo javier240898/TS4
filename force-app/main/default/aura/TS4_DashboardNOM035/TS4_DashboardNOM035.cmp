@@ -1,0 +1,353 @@
+<aura:component controller="TS4_DashboardNOM035" implements="flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="general" type="Map"/>
+    <aura:attribute name="dominios" type="List"/>
+    <aura:attribute name="categorias" type="List"/>
+    <aura:attribute name="dominiosmuyalto" type="List"/>
+    <aura:attribute name="dominiosalto" type="List"/>
+    <aura:attribute name="dominiosmedio" type="List"/>
+    <aura:attribute name="dominiosbajo" type="List"/>
+    <aura:attribute name="dominiosnulos" type="List"/>
+    <aura:attribute name="categoriasmuyalto" type="List"/>
+    <aura:attribute name="categoriasalto" type="List"/>
+    <aura:attribute name="categoriasmedio" type="List"/>
+    <aura:attribute name="categoriasbajo" type="List"/>
+    <aura:attribute name="categoriasnulo" type="List"/>
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    
+    <div class="slds-grid slds-wrap" >
+        <div class="slds-col slds-size_12-of-12" style="padding-right:5px;">
+            <aura:if isTrue="{!v.general.Nombre =='Riesgos Psicosociales'}">
+                <div class="slds-box" style="background-color:white;">
+                    <div class="slds-grid slds-grid--pull-padded slds-wrap">
+                        <div class="slds-col--padded slds-size--1-of-1" style="padding-bottom: 15px;border-bottom: gray solid;margin-bottom: 15px;"> <span style="font-size:1.25rem">Tabla de Toma de decisiones</span></div>
+                        <center class="slds-box" style="width:100%">
+                            <div class="slds-grid slds-wrap" >
+                                <div class="slds-col slds-size--1-of-1">
+                                    <center style="width:50%">
+                                        <c:TS4_DashboardNOM35TomaDecisiones/>
+                                    </center>
+                                </div>
+                            </div>
+                        </center>
+                    </div>
+                </div>
+            </aura:if>
+        </div>
+        
+        <div class="slds-col slds-size_12-of-12" style="padding-right:5px;">
+            <aura:if isTrue="{!v.general.Nombre =='Riesgos Psicosociales'}">
+                <div class="slds-box" style="background-color:white;">
+                    <div class="slds-grid slds-grid--pull-padded slds-wrap">
+                        <div class="slds-col--padded slds-size--1-of-1" style="padding-bottom: 15px;border-bottom: gray solid;margin-bottom: 15px;"> 
+                            <span style="font-size:1.25rem">Resultados Guía de Referencia</span><br/>
+                            <span style="font-size:1rem">Identificación y Análisis de los Factores de Riesgo Psicosocial.</span>
+                        </div>
+                        <center class="slds-box slds-m-right_x-small" style="width:100%">
+                            <div class="slds-grid slds-wrap" >
+                                <div class="slds-col slds-size--1-of-2 slds-box">
+                                    <div class="slds-grid slds-wrap slds-grid_vertical-align-center slds-grid_align-center">
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-3 ">
+                                            <img src="{!$Resource.IconosNOM + '/IconosNOM/riesgos.png'}" class="nom035-icon"/>
+                                        </div>
+                                        <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-3 slds-large-size_2-of-3 ">
+                                            <c:TS4_DashboardTile esGeneral="true" scoreValue='{!v.general.Puntuacion}' blueScale='{!v.general.blueScale}' greenScale='{!v.general.greenScale}' yellowScale='{!v.general.yellowScale}' orangeScale='{!v.general.orangeScale}' redScale='{!v.general.redScale}'/>    
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-size--1-of-2">
+                                    <c:TS4_DashboardNom035SmallTable/> 
+                                </div>
+                            </div>
+                        </center>
+                    </div>
+                </div>
+            </aura:if>
+        </div>
+
+        <div class="slds-col slds-size_12-of-12 slds-align_absolute-center">
+            <div class="slds-box" style="background-color:white;">
+                <div class="slds-grid slds-grid--pull-padded slds-wrap">
+                    <div id="wrapper" class="slds-col--padded slds-size--1-of-1" style="padding-bottom: 15px;border-bottom: gray solid;margin-bottom: 15px;"> <span style="font-size:1.25rem">Dominios</span></div>
+                    <aura:iteration items="{!v.dominios}" var="dominio">                
+                        <div class="slds-col--padded slds-size--1-of-3 slds-box">
+                            <div class="slds-grid slds-wrap slds-grid_vertical-align-center slds-grid_align-center">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-3 ">
+                                    <img class="nom035-icon" src="{!dominio.IconoItem}" />
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-3 slds-large-size_2-of-3 ">
+                                    <c:TS4_DashboardTile scoreValue='{!dominio.Puntuacion}' blueScale='{!dominio.blueScale}' greenScale='{!dominio.greenScale}' yellowScale='{!dominio.yellowScale}' orangeScale='{!dominio.orangeScale}' redScale='{!dominio.redScale}'/>   
+                                </div>
+                            </div>
+                        </div>
+                    </aura:iteration>
+                </div>
+            </div>
+        </div>
+        <div class="slds-col slds-size_1-of-1">
+            <div class="slds-box" style="background-color:white;">
+                <div class="slds-grid slds-grid--pull-padded slds-wrap">
+                    <div id="wrapper" class="slds-col--padded slds-size--1-of-1" style="padding-bottom: 15px;border-bottom: gray solid;margin-bottom: 15px;"> <span style="font-size:1.25rem">Categorías</span></div>
+                    <aura:iteration items="{!v.categorias}" var="categoria">
+                        <div class="slds-col--padded slds-size--1-of-3 slds-box">
+                           	<div class="slds-grid slds-wrap slds-grid_vertical-align-center slds-grid_align-center ">
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-3 slds-large-size_1-of-3 ">
+                                    <img class="nom035-icon" src="{!categoria.IconoCatItem}" />
+                                </div>
+                                <div class="slds-col slds-size_1-of-1 slds-medium-size_2-of-3 slds-large-size_2-of-3 ">
+                                    <c:TS4_DashboardTile scoreValue='{!categoria.Puntuacion}' blueScale='{!categoria.blueScale}' greenScale='{!categoria.greenScale}' yellowScale='{!categoria.yellowScale}' orangeScale='{!categoria.orangeScale}' redScale='{!categoria.redScale}'></c:TS4_DashboardTile>
+                                </div>
+                            </div>
+                        </div>
+                    </aura:iteration>
+                </div>
+            </div>
+        </div>
+        <div class="slds-col slds-size_12-of-12">
+            <div class="slds-box" style="background-color:white;">
+                <div class="slds-grid slds-grid--pull-padded slds-wrap">
+                    <div class="slds-col--padded slds-size--1-of-1" style="padding-bottom: 15px;border-bottom: gray solid;margin-bottom: 15px;"> 
+                        <span style="font-size:1.25rem">BOX</span><br/>
+                        <span style="font-size:1rem">En la siguiente matriz se concentran de forma sintetizada los resultados arriba expuestos a fin de facilitar a la Organización la identificación de los factores en donde deberá enfocar sus esfuerzos, respecto al nivel de riesgo obtenido.</span>
+                    </div>
+                    <div class = "slds-align_absolute-center" style="width:100%">
+                        <div class="slds-grid slds-wrap" >
+                            <div class="slds-col slds-size_1-of-1" >
+                                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered slds-no-row-hover">
+                                    <thead>
+                                        <tr class="slds-text-heading--label ">
+                                            <th class="" scope="col">
+                                                <div class="slds-align_absolute-center" title="Nivel de riesgo">Nivel de riesgo</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-align_absolute-center" title="Intervención necesaria">Intervención necesaria</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-align_absolute-center" title="Resultados Global">Resultados Global</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-align_absolute-center" title="Dominios">Dominios</div>
+                                            </th>
+                                            <th class="" scope="col">
+                                                <div class="slds-align_absolute-center" title="Categorías">Categorías</div>
+                                            </th>
+                                            
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="slds-hint-parent">
+                                            <th data-label="Nivel de riesgo" bgcolor="red">
+                                                <div class="slds-align_absolute-center" title="Muy alto" style="color:#FFF"> Muy alto </div>
+                                            </th>
+                                            <td data-label="Intervención necesaria" >
+                                                <div class="slds-align_absolute-center" title="Inmediata(2 meses)">Inmediata(2 meses)</div>
+                                            </td>
+                                            <td data-label="Riesgos Psicosociales">
+                                                <div class="slds-align_absolute-center" title="Riesgos Psicosociales">
+                                                    <aura:if isTrue="{!v.general.escalaObtenida=='red'}">  
+                                                        <img src="{!$Resource.IconosNOM + '/IconosNOM/riesgos.png'}" width="100"/>  
+                                                    </aura:if>
+                                                </div>
+                                            </td>
+                                            <td data-label="Dominios">
+                                                <div class="slds-align_absolute-center" title="Dominios">
+                                                    <div class="slds-grid slds-wrap nom035-td" >
+                                                        <aura:iteration items="{!v.dominiosmuyalto}" var="dominio"> 
+                                                           
+                                                             <div class="slds-col slds-size_1-of-2">
+                                                                <img class="nom035-icon" src="{!dominio.IconoItem}"/>        
+                                                            </div>
+
+                                                        </aura:iteration>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </td>
+                                            <td data-label="Categorías">
+                                                <div class="slds-align_absolute-center" title="Categorías">
+                                                    <div class="slds-grid slds-wrap nom035-td" >
+                                                        <aura:iteration items="{!v.categoriasmuyalto}" var="categorias">  
+                                                            <div class="slds-col slds-size_1-of-2">
+                                                                <img class="nom035-icon" src="{!categorias.IconoCatItem}" />
+                                                            </div>
+                                                        </aura:iteration>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            
+                                        </tr>
+                                        
+                                        <tr class="slds-hint-parent">
+                                            <th data-label="Nivel de riesgo" scope="row" bgcolor="#FDC000">
+                                                <div class="slds-align_absolute-center" title="Alto">Alto </div>
+                                            </th>
+                                            <td data-label="Intervención necesaria">
+                                                <div class="slds-align_absolute-center" title="A corto plazo(3 meses)">A corto plazo(3 meses)</div>
+                                            </td>
+                                            <td data-label="Riesgos Psicosociales">
+                                                <div class="slds-align_absolute-center" title="Riesgos Psicosociales">
+                                                    <aura:if isTrue="{!v.general.escalaObtenida=='orange'}">  
+                                                        <img src="{!$Resource.IconosNOM + '/IconosNOM/riesgos.png'}" class="nom035-icon" />  
+                                                    </aura:if>
+                                                </div>
+                                            </td>
+                                            <td data-label="Dominios">
+                                                <div class="slds-align_absolute-center" title="Dominios">
+                                                    <div class="slds-grid slds-wrap nom035-td" >
+                                                        <aura:iteration items="{!v.dominiosalto}" var="dominio">  
+                                                            
+                                                             <div class="slds-col slds-size_1-of-2">
+                                                                <img class="nom035-icon" src="{!dominio.IconoItem}"/>        
+                                                            </div>
+                                                        </aura:iteration>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td data-label="Categorías">
+                                                <div class="slds-align_absolute-center" title="Categorías">
+                                                    <div class="slds-grid slds-wrap nom035-td" >
+                                                        <aura:iteration items="{!v.categoriasalto}" var="categoria"> 
+                                                            <div class="slds-col slds-size_1-of-2">
+                                                                <img class="nom035-icon" src="{!categoria.IconoCatItem}" />
+                                                            </div>
+                                                        </aura:iteration>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            
+                                        </tr>
+                                        
+                                        <tr class="slds-hint-parent">
+                                            <th data-label="Nivel de riesgo" scope="row" bgcolor="#FDFF04">
+                                                <div class="slds-align_absolute-center" title="Medio">Medio </div>
+                                            </th>
+                                            <td data-label="Intervención necesaria">
+                                                <div class="slds-align_absolute-center" title="A mediano plazo(4 meses)">A mediano plazo(4 meses)</div>
+                                            </td>
+                                            <td data-label="Riesgos Psicosociales">
+                                                <div class="slds-align_absolute-center" title="Riesgos Psicosociales">
+                                                    <aura:if isTrue="{!v.general.escalaObtenida=='yellow'}">  
+                                                        <img src="{!$Resource.IconosNOM + '/IconosNOM/riesgos.png'}" width="200"/>  
+                                                    </aura:if>
+                                                </div>
+                                            </td>
+                                            <td data-label="Dominios">
+                                                <div class="slds-align_absolute-center" title="Dominios">
+                                                    <div class="slds-grid slds-wrap nom035-td" >
+                                                        <aura:iteration items="{!v.dominiosmedio}" var="dominio">
+                                                          	<aura:if isTrue="{!v.dominiosmedio.lenght > 1}">
+                                                                <div class="slds-col slds-size_1-of-2">
+                                                                    <img class="nom035-icon" src="{!dominio.IconoItem}" />
+                                                                </div>
+                                                                <aura:set attribute="else">
+                                                                    <div class="slds-col slds-size_1-of-1  slds-medium-size_1-of-2 slds-large-size_1-of-2">
+                                                                        <img class="nom035-icon" src="{!dominio.IconoItem}" />
+                                                                    </div>
+                                                                </aura:set>
+                                                            </aura:if> 
+                                                        </aura:iteration>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td data-label="Categorías">
+                                                <div class="slds-align_absolute-center" title="Categorías">
+                                                    <div class="slds-grid slds-wrap nom035-td" >
+                                                        <aura:iteration items="{!v.categoriasmedio}" var="categoria">  
+                                                            <div class="slds-col slds-size_1-of-2">
+                                                                <img class="nom035-icon" src="{!categoria.IconoCatItem}" />
+                                                            </div>
+                                                        </aura:iteration>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            
+                                        </tr>
+                                        
+                                        <tr class="slds-hint-parent">
+                                            <th data-label="Nivel de riesgo" scope="row" bgcolor="#69F66E">
+                                                <div class="slds-align_absolute-center" title="Bajo">Bajo</div>
+                                                
+                                            </th>
+                                            <td data-label="Intervención necesaria">
+                                                <div class="slds-align_absolute-center" title="A largo plazo(6 meses)">A largo plazo(6 meses)</div>
+                                            </td>
+                                            <td data-label="Riesgos Psicosociales">
+                                                <div class="slds-align_absolute-center" title="Riesgos Psicosociales">
+                                                    <aura:if isTrue="{!v.general.escalaObtenida=='green'}">  
+                                                        <img src="{!$Resource.IconosNOM + '/IconosNOM/riesgos.png'}" width="100"/>  
+                                                    </aura:if>
+                                                </div>
+                                            </td>
+                                            <td data-label="Dominios">
+                                                <div class="slds-align_absolute-center" title="Dominios">
+                                                    <div class="slds-grid slds-wrap nom035-td" >
+                                                        <aura:iteration items="{!v.dominiosbajo}" var="dominio"> 
+                                                            
+                                                             <div class="slds-col slds-size_1-of-2">
+                                                                <img class="nom035-icon" src="{!dominio.IconoItem}"/>        
+                                                            </div>
+                                                        </aura:iteration>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td data-label="Categorías">
+                                                <div class="slds-align_absolute-center" title="Categorías">
+                                                    <div class="slds-grid slds-wrap nom035-td" >
+                                                        <aura:iteration items="{!v.categoriasbajo}" var="categoria"> 
+                                                            <div class="slds-col slds-size_1-of-2">
+                                                                <img class="nom035-icon" src="{!categoria.IconoCatItem}" />
+                                                            </div>
+                                                        </aura:iteration>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr class="slds-hint-parent">
+                                            <th data-label="Nivel de riesgo" scope="row" bgcolor="#9CE5F7">
+                                                <div class="slds-align_absolute-center" title="Nulo">Nulo</div>
+                                            </th>
+                                            <td data-label="Intervención necesaria">
+                                                <div class="slds-align_absolute-center" title="Constante">Constante</div>
+                                            </td>
+                                            <td data-label="Riesgos Psicosociales">
+                                                <div class="slds-align_absolute-center" title="Riesgos Psicosociales">
+                                                    <aura:if isTrue="{!v.general.escalaObtenida=='blue'}">  
+                                                        <img src="{!$Resource.IconosNOM + '/IconosNOM/riesgos.png'}" width="100"/>  
+                                                    </aura:if>
+                                                </div>
+                                            </td>
+                                            <td data-label="Dominios">
+                                                <div class="slds-align_absolute-center" title="Dominios">
+                                                    <div class="slds-grid slds-wrap nom035-td" >
+                                                        <aura:iteration items="{!v.dominiosnulos}" var="dominio"> 
+                                                            <div class="slds-col slds-size_1-of-2">
+                                                                <img class="nom035-icon" src="{!dominio.IconoItem}"/>        
+                                                            </div>
+                                                            
+                                                            
+                                                        </aura:iteration>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td data-label="Categorías">
+                                                <div class="slds-align_absolute-center" title="Categorías">
+                                                    <div class="slds-grid slds-wrap nom035-td" >
+                                                        <aura:iteration items="{!v.categoriasnulo}" var="categoria"> 
+                                                            <div class="slds-col slds-size_1-of-2">
+                                                                <img class="nom035-icon" src="{!categoria.IconoCatItem}" />
+                                                            </div>
+                                                        </aura:iteration>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</aura:component>

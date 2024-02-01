@@ -1,0 +1,14 @@
+<aura:component  controller="TS4_DocumentsController" implements="flexipage:availableForAllPageTypes,force:hasRecordId,force:lightningQuickActionWithoutHeader,forceCommunity:availableForAllPageTypes" access="global">
+    <aura:attribute name="documents" type="string"/>
+    <aura:attribute name="titledocuments" type="string"/>
+    <aura:attribute name="recordId" type="String"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+    
+    <div class="c-container" style= 'background: white;'> <center> <br/>
+        <span ><b>Documento Ruta para {!v.titledocuments}</b></span><br/><br/>
+        <lightning:fileCard fileId="{!v.documents}" description="{!v.titledocuments}"/>
+        <br/><br/>
+        </center>
+    </div>
+</aura:component>

@@ -1,0 +1,19 @@
+<aura:component controller="AMS_GraficasHomeCerrado" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction" access="global" >
+	<ltng:require scripts="{!join(',',$Resource.highcharts
+                           
+                           )}" afterScriptsLoaded="{!c.afterScriptsLoaded}"/>
+    
+  
+    <aura:attribute name="chartType" type="string"/>
+    <aura:attribute name="chartTitle" type="string" default="Opportunity by StageName"/>
+    <aura:attribute name="chartSubTitle" type="string" default="Display Opportunity Count by StageName"/>
+    <aura:attribute name="xAxisCategories" type="string[]" default="['Qualification','Negotiation/Review','Closed Won','Id. Decision Makers','Proposal/Price Quote','Proposition','Prospecting','Perception Analysis','Needs Analysis']"/>
+    <aura:attribute name="yAxisParameter" type="string" default="No. of Opportunity"/>
+    <aura:attribute name="data" type="string"/>
+    <aura:attribute name="contractID" type="string" default=""/>
+    <aura:handler name="GraficasUpdateClosed" event="c:AMS_ActualizaGraficas" action="{!c.handleactiva}"/>
+    
+    <div class="slds-grid slds-wrap slds-grid--pull-padded">
+        <div aura:id="chart" style="height: 400px"></div>
+    </div>
+</aura:component>

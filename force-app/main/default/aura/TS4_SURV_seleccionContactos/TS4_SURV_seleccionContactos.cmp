@@ -1,0 +1,78 @@
+<aura:component implements='force:appHostable,force:hasRecordId,flexipage:availableForAllPageTypes' controller='TS4_SURV_SeleccionContactos'>
+    <aura:attribute name='contactos' type='list' />
+    <aura:attribute name='contactosApp' type='list' />
+    <aura:handler name='init' value='{!this}' action='{!c.doInit}' />
+
+    <table aria-multiselectable="true" class="slds-table slds-table_bordered slds-table_fixed-layout slds-table_resizable-cols" role="grid">
+        <thead>
+            <tr class="slds-line-height_reset">
+                <th class="slds-text-align_right" scope="col" style="width:3.25rem">
+                    <div class="slds-th__action slds-th__action_form">
+                        <div class="slds-checkbox">
+                            <lightning:input type="checkbox" variant="label-hidden" aura:id="checkboxAll" name="options" onchange="{! c.handleCheck}"/>
+                        </div>
+                    </div>
+                </th>
+                <th aria-label="Nombre" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+                    <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0">
+                        <span class="slds-assistive-text">Sort by: </span>
+                        <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                            <span class="slds-truncate" title="Nombre">Nombre</span>
+
+                        </div>
+                    </a>
+                </th>
+                <th aria-label="Apellido" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+                    <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0">
+                        <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                            <span class="slds-truncate" title="Apellido">Apellido</span>
+
+                        </div>
+                    </a>
+                </th>
+                <th aria-label="Movil" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+                    <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0">
+                        <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                            <span class="slds-truncate" title="Movil">Móvil</span>
+
+                        </div>
+                    </a>
+                </th>
+                <th aria-label="Correo" aria-sort="none" class="slds-is-resizable slds-is-sortable" scope="col">
+                    <a class="slds-th__action slds-text-link_reset" href="javascript:void(0);" role="button" tabindex="0">
+                        <div class="slds-grid slds-grid_vertical-align-center slds-has-flexi-truncate">
+                            <span class="slds-truncate" title="Correo">Correo</span>
+
+                        </div>
+                    </a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <aura:iteration items="{!v.contactos}" var="item">
+                <tr aria-selected="false" class="slds-hint-parent">
+                    <td class="slds-text-align_right" role="gridcell">
+                        <lightning:input type="checkbox" variant="label-hidden" name="{!item.Id}" checked="{!item.selected}" aura:id="checkContact"/>
+                    </td>
+                    <th scope="row">
+                        <div class="slds-truncate">
+                            <a href="javascript:void(0);" tabindex="0">{!item.FirstName}</a>
+                        </div>
+                    </th>
+                    <td role="gridcell">
+                        <div class="slds-truncate">{!item.LastName}</div>
+                    </td>
+                    <td role="gridcell">
+                        <div class="slds-truncate">{!item.MobilePhone}</div>
+                    </td>
+                    <td role="gridcell">
+                        <div class="slds-truncate">{!item.Email}</div>
+                    </td>
+                </tr>
+            </aura:iteration>
+        </tbody>
+    </table>
+
+    <lightning:button variant="brand" label="Guardar" title="Guardar" onclick="{! c.handleClick }" />
+
+</aura:component>

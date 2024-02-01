@@ -1,0 +1,45 @@
+<aura:component controller="TS4_ListaReportesController" implements="flexipage:availableForRecordHome,force:hasRecordId" access="global" >
+    <aura:attribute name="recordId" type="Id"/>
+    <aura:attribute name="data" type="Object"/>
+    <aura:attribute name="columns" type="List"/>
+    
+    
+    <aura:handler name= "init" value= "{!this}" action= "{!c.doInit}"/>
+         
+
+    <div aura:id="tablaReportes" class = "" style="padding-top:20px;">
+        <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_col-bordered">
+            <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Nombre">Nombre</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="Descripcion">Descripción</div>
+                    </th>
+                    <th class="" scope="col">
+                        <div class="slds-truncate" title="URL">URL</div>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <aura:iteration items="{!v.data}" var="datos">
+                    <tr class="slds-hint-parent">
+                        <td data-label="Nombre" scope="row">
+                            {!datos.Name}
+                        </td>
+                        <td data-label="Descripcion">
+                            {!datos.Descripcion__c}
+                        </td>
+                        <td data-label="URL">
+                             <lightning:button variant="base" label="Ver Reporte" title="Ir a reporte" value="{!datos.URL__c}" onclick="{!c.GoReport }"/>
+    
+                            <!--{!datos.URL__c}-->
+                        </td>
+                    </tr>
+                </aura:iteration>
+            </tbody>
+        </table>
+     </div>
+        
+</aura:component>

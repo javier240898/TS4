@@ -1,0 +1,27 @@
+<aura:component>
+    <aura:attribute name="blueScale" type="Integer" default="20"/>
+    <aura:attribute name="greenScale" type="Integer" default="40"/>
+    <aura:attribute name="yellowScale" type="Integer" default="60"/>
+    <aura:attribute name="orangeScale" type="Integer" default="80"/>
+    <aura:attribute name="redScale" type="Integer" default="100"/>
+    
+    <aura:attribute name="scoreValue" type="Integer" />
+    <aura:attribute name="esGeneral" type="Boolean" default="false"/>
+    
+    <aura:attribute name="blueValue" type="String" default=" "/>
+    <aura:attribute name="greenValue" type="String" default=" "/>
+    <aura:attribute name="yellowValue" type="String" default=" "/>
+    <aura:attribute name="orangeValue" type="String" default=" "/>
+    <aura:attribute name="redValue" type="String" default=" "/>
+    
+    <aura:handler name="init" action="{!c.doInit}" value="{!this}"/>
+    <div >
+        <span class="slds-badge" style="{!v.esGeneral == true? 'font-size:15px':'' }">0</span>
+        <span aura:id="blue" class="slds-badge slds-blue" style="{!v.esGeneral == true? 'font-size:30px':'' }">{!v.blueValue}</span>
+        <span aura:id="green" class="slds-badge slds-green" style="{!v.esGeneral == true? 'font-size:30px':'' }">{!v.greenValue}</span>
+        <span aura:id="yellow" class="slds-badge slds-yellow" style="{!v.esGeneral == true? 'font-size:30px':'' }">{!v.yellowValue}</span>
+        <span aura:id="orange" class="slds-badge slds-orange" style="{!v.esGeneral == true? 'font-size:30px':'' }">{!v.orangeValue}</span>
+        <span aura:id="red" class="slds-badge slds-red" style="{!v.esGeneral == true? 'font-size:30px':'' }">{!v.redValue}</span>
+        <span class="slds-badge" style="{!v.esGeneral == true? 'font-size:15px':'' }">{!v.redScale}</span>
+    </div>
+</aura:component>

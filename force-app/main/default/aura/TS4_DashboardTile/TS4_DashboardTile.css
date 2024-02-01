@@ -1,0 +1,48 @@
+.THIS .slds-blue{
+    border-color:#9CE5F8;
+    color:#fff;
+    font-size:0.25rem;
+    border-style:solid;
+    border-width:2px;
+    background-color:#9CE5F8;
+}
+
+.THIS .slds-green{
+    border-color:#6BF66E;
+    color:#fff;
+    font-size:0.25rem;
+    border-style:solid;
+    border-width:2px;
+    background-color:#6BF66E;
+}
+
+.THIS .slds-yellow{
+    border-color:#FFFF02;
+    color:#000;
+    font-size:0.25rem;
+    border-style:solid;
+    border-width:2px;
+    background-color:#FFFF02;
+}
+
+.THIS .slds-orange{
+    border-color:#FCC000;
+    color:#fff;
+    font-size:0.25rem;
+    border-style:solid;
+    border-width:2px;
+    background-color:#FCC000;
+}
+
+.THIS .slds-red{
+    border-color:#FA0000;
+    color:#fff;
+    font-size:0.25rem;
+    border-style:solid;
+    border-width:2px;
+    background-color:#FA0000;
+}
+
+.THIS .slds-active{
+    font-size:1rem;
+}

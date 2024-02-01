@@ -1,0 +1,70 @@
+.THIS .slds-input{
+    width: 85%;
+    margin-left: 40px;
+}
+.THIS .slds-form-element__label {
+    width: 85%;
+    margin-left: 40px;
+}
+.THIS .slds-icon-standard-account {
+    width: 100%;
+}
+.THIS .iconLogin {
+    padding-left: 50%;
+}
+.THIS .slds-button {
+    margin-left: 40%;
+    margin-top: 10px;
+}
+.THIS .imgLogin {
+    width: 200px;
+    margin-left: 30%;
+}
+.THIS .headerImg {
+    width: 200px;
+    margin-right: 50%;
+}
+.THIS .salesforceImg {
+    width: 100px;
+    margin-left: 50%;
+}
+.THIS .titleLogin {
+    margin-top: 30px;
+    font-size: 30px;
+    width: 70%;
+}
+.THIS .slds-modal__header {
+    background-color: #EEEEEE;
+    border-bottom-style: none;
+}
+
+.THIS .slds-modal__footer {
+    background-color: #EEEEEE;
+    border-top-style: none;
+}
+
+.THIS .bodyLogin {
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.THIS .imgLoginFooter {
+    width: 100%;
+}
+.THIS .msgSesionExpirada {
+    z-index: 999999999999;
+    position: absolute;
+    margin: auto;
+    top: 21%;
+    width: 35%;
+    height: 45%;
+}
+.THIS .bodyError {
+    margin-top: 5%!important;
+    font-size: 15px;
+    text-align: center;
+}
+.THIS .tituloError {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+}

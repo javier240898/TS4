@@ -1,0 +1,3 @@
+<aura:event type="APPLICATION" description="Event for communication between components" >
+    <aura:attribute type="String" name="contractID"/>
+</aura:event>

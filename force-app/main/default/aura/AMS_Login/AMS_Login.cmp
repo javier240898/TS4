@@ -1,0 +1,59 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="AMS_LoginPortal">
+    
+    <aura:attribute type="String" name="UserName"/>
+    <aura:attribute type="Integer" name="intentos" default='0'/>
+    <aura:attribute type="boolean" name="bloqueado" default='false'/>
+    <aura:attribute type="String" name="mensajeBloqueo"/>
+    <aura:attribute type="String" name="horaDesbloqueo" default='sHr'/>
+    <aura:attribute type="String" name="expirado" default='false'/>
+ 
+    <header class="slds-modal__header headerLogin" style="border-bottom-style:none">
+        <div class="slds-grid slds-gutters">
+            <div class="slds-col">
+            </div>
+            <div class="slds-col slds-large-size">
+            </div>
+            <div class="slds-col">
+                <img src="{!$Resource.SalesforceLogo}" class="salesforceImg" alt="User avatar"/>
+            </div>
+        </div>
+    </header>
+    <div class="slds-grid slds-gutters">
+        <div class="slds-col slds-size_1-of-3">
+            
+        </div>
+        <div class="slds-col slds-size_1-of-3 bodyLogin">
+            <lightning:card class="PadTop" variant="Narrow" title="" iconName="" footer="">
+                <img src="{!$Resource.LogoTS4}" class="imgLogin" alt="User avatar"/>
+                <br/>
+                <aura:if isTrue="{!v.expirado == '0'}">
+                    <ui:message title="Error" severity="error" closable="true">
+                        Tu sesión ha expirado, inicia nuevamente.
+                    </ui:message>
+                </aura:if>
+                <lightning:input aura:id="userName" name="UserName" type="email" label="Nombre de usuario" value="{!v.UserName}"/>
+                <lightning:input aura:id="password" type="password" label="Contraseña" name="UserPass"/>
+                <aura:if isTrue="{!v.bloqueado}">
+                    <button class="slds-button slds-button_brand" onclick="{! c.initLogin }" diabled="true">Iniciar Sesión</button>
+                    <ui:message title="Error" severity="error" closable="true">
+                        {!v.mensajeBloqueo}
+                    </ui:message>
+                    <aura:set attribute="else">
+                        <button class="slds-button slds-button_brand" onclick="{! c.initLogin }">Iniciar Sesión</button>
+                    </aura:set>
+                </aura:if> 
+                <aura:if isTrue="{!v.intentos==1 || !v.intentos==2}">
+                    <ui:message title="Error" severity="error" closable="true">
+                        {!v.mensajeBloqueo}
+                    </ui:message>
+                </aura:if> 
+            </lightning:card>
+        </div>
+        <div class="slds-col slds-size_1-of-3">
+            
+        </div>
+    </div>
+    <footer class="slds-modal__footer bodyFooter" style="border-top-style:none; background-color:white; padding:0px;position: absolute;bottom: 0;">
+        <img src="{!$Resource.AMS_Footer}" class="imgLoginFooter" alt="User avatar"/>        
+    </footer>
+</aura:component>

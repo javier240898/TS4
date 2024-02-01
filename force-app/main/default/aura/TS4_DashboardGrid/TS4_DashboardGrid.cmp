@@ -1,0 +1,40 @@
+<aura:component implements="lightning:recordHomeTemplate" access="global" >
+    <aura:attribute name="center" type="Aura.Component[]" />
+    <aura:attribute name="left" type="Aura.Component[]" />
+    <aura:attribute name="right" type="Aura.Component[]" />
+    <aura:attribute name="TS4_Header" type="Aura.Component[]" />
+    <aura:attribute name="TS4_Body" type="Aura.Component[]" />
+    <aura:attribute name="TS4_SectLeft" type="Aura.Component[]" />
+    <aura:attribute name="TS4_SectRight" type="Aura.Component[]" />
+    <aura:attribute name="TS4_ReportBody" type="Aura.Component[]" />
+    
+    <div class="slds-grid slds-wrap">
+        <div class="slds-col slds-size_1-of-1" style="padding-bottom:10px;">
+            <span>{!v.TS4_Header}</span>
+        </div>
+        <div class="slds-col slds-size_1-of-1" style="padding-bottom:10px;">
+            <span>{!v.TS4_Body}</span>
+        </div>
+        
+        <div class="slds-col slds-size_1-of-2" style="padding-right:5px;">
+            <span>{!v.TS4_SectLeft}</span>
+        </div>
+        <div class="slds-col slds-size_1-of-2" style="padding-left:5px;">
+            <span>{!v.TS4_SectRight}</span>
+        </div>
+        
+        <div class="slds-col slds-size_1-of-1" style="padding-top:10px;padding-bottom:10px;">
+            <span>{!v.TS4_ReportBody}</span>
+        </div>
+        
+        <div class="slds-col slds-size_1-of-3" style="padding-right:5px;">
+            <span>{!v.left}</span>
+        </div>
+        <div class="slds-col slds-size_1-of-3" style="padding-right:5px;padding-left:5px;">
+            <span>{!v.center}</span>
+        </div>
+        <div class="slds-col slds-size_1-of-3" style="padding-left:5px;">
+            <span>{!v.right}</span>
+        </div>        
+    </div>
+</aura:component>

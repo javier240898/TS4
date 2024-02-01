@@ -1,0 +1,17 @@
+<apex:page showHeader="false" sidebar="false"  >
+    <apex:includeLightning />   
+    <div id="lightning" />
+    
+    <script>
+    //Tell your Visualforce page to use ExposeVF Lightning app
+    $Lightning.use("c:AMS_HomeApp", function() {
+        // Write a function that creates the component on the page
+        $Lightning.createComponent("c:AMS_Home",
+                                   {"contactID" : "{!$CurrentPage.parameters.contactId}"},
+                                   "lightning",
+                                   function(cmp) {
+                                       // do some stuff
+                                   });
+    });
+    </script>
+</apex:page>

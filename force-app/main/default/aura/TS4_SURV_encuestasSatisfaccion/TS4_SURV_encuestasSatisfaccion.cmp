@@ -1,0 +1,134 @@
+<aura:component implements='force:appHostable,force:hasRecordId,flexipage:availableForAllPageTypes' controller='TS4_SURV_EncuestasSatisfaccion' access="global">
+    <aura:attribute name='valorSetOpciones' type='list' />
+    <aura:attribute name='valorContactosApp' type='list' />
+    <aura:attribute name='listaRespuesta' type='list' />
+    <aura:attribute name="recordId" type="Id" />
+    <aura:attribute name='selTabId' type="String" />
+    <aura:attribute name='Enviado' type="Boolean" default="false"/>
+
+    <aura:attribute name='statusToast' type="String" />
+    <aura:attribute name='message' type="String" />
+
+    <aura:handler name='init' value='{!this}' action='{!c.doInit}' />
+
+    <c:TS4_SURV_LightningToast aura:id="messageContainer" />
+
+    <aura:iteration items="{!v.valorContactosApp}" var="item">
+        <div  class="{! item.contactoEncuesta.TS4_EncuestaContestada__c == true ? 'slds-hide':'slds-show'}">
+            <div class="slds-clearfix" aura:id="data-entry" style="padding:10px">
+                <div aura:id="bienvenida" class="slds-show">
+                    <div class="slds-grid slds-grid_align-center">
+                        <div class="slds-col slds-size_1-of-4"></div>
+                        <div class="slds-col slds-m-top_small slds-size_2-of-4">
+                            <aura:if isTrue="{!item.contactoEncuesta.TS4_URLLogotipo__c != null}">
+                                <div class="slds-align_absolute-center">
+                                    <img src="{!item.contactoEncuesta.TS4_URLLogotipo__c}" alt="imgEmpreskka" style="max-width:200px;"/>
+                                </div>
+                            </aura:if>
+                            <div class="slds-m-top_small">
+                            	<lightning:formattedRichText value="{!item.encuesta.TS4_Welcome__c}" />
+                            </div>
+                            <div class="slds-m-top_small slds-align_absolute-center">
+                                <lightning:button variant="success" label="Iniciar" title="Iniciar" onclick="{! c.startClick }" />
+                            </div>
+                        </div>
+                        <div class="slds-col slds-size_1-of-4"></div>
+                    </div>
+                </div>
+                <div aura:id="encuesta" class="slds-hide">
+                    <div class="slds-m-bottom_medium"> <span><b>Entrevistado: {!item.contacto.Name}</b></span>
+                        <div class="slds-float_right">
+                            <lightning:button variant="brand" label="Guardar" title="Guardar" onclick="{! c.handleClick }" />
+                            <lightning:button variant="success" label="Enviar Encuesta" title="Enviar" onclick="{! c.sendClick }" disabled = "{! v.Enviado }" />
+                        </div><br />
+                    </div>
+                    <lightning:tabset variant="scoped" selectedTabId="{!v.selTabId}">
+                        <aura:iteration items="{!item.guias}" var="guia">
+                            <lightning:tab label="{!guia.guia.Name}" id="{!guia.guia.Id}">
+                                <lightning:formattedRichText value="{! guia.guia.TS4_guideHeader__c }" />
+                                <aura:iteration items="{!guia.secciones}" var="seccion">
+                                    <div class="{!if(seccion.muestraSeccion == true,'slds-show','slds-hide')}">
+                                        <div class="slds-section slds-is-open">
+                                            <h3 class="slds-section__title slds-theme_shade">
+                                                <span class="slds-truncate slds-p-horizontal_small" title="{!seccion.Name}"> {!seccion.Name}</span>
+                                            </h3>
+                                            <aura:iteration items="{!seccion.Preguntas__r}" var="pregunta">
+                                                <div class="{!if(pregunta.muestraPregunta == true,'slds-show','slds-hide')}">
+                                                    <div aria-hidden="false" class="slds-section__content">
+                                                        {!pregunta.TS4_questionContent__c }
+                                                    </div>
+                                                    <aura:if isTrue="{!pregunta.TS4_TipoDato__c == 'Set de opciones'}">
+                                                        <lightning:radioGroup name="{!pregunta.Id}" options="{! pregunta.opciones}" value="{! pregunta.respuesta}" type="button" onchange="{! c.handleChange }" />
+                                                        <aura:set attribute="else">
+                                                        	<lightning:input name="{!pregunta.Id}"  value="{! pregunta.respuesta}" onchange="{! c.handleChange }"/>
+                                                        </aura:set>
+                                                    </aura:if>
+                                                </div>
+                                            </aura:iteration>
+                                        </div>
+                                    </div>
+                                </aura:iteration>
+                            </lightning:tab>
+                        </aura:iteration>
+                        <div class="slds-m-top_small slds-float_right">
+                            <lightning:button variant="brand" label="Guardar" title="Guardar" onclick="{! c.handleClick }" />
+                            <lightning:button variant="success" label="Enviar Encuesta" title="Enviar" onclick="{! c.sendClick }" />
+                        </div>
+                    </lightning:tabset>
+                </div>
+                <div aura:id="agradecimiento" class="slds-hide">
+                    <div class="slds-grid slds-grid_align-center">
+                        <div class="slds-col slds-size_1-of-4"></div>
+                        <div class="slds-col slds-size_2-of-4">
+                            <lightning:formattedRichText value="{!item.encuesta.TS4_Gratitude__c }" />
+                        </div>
+                        <div class="slds-col slds-size_1-of-4"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="{! item.contactoEncuesta.TS4_EncuestaContestada__c == true ? 'slds-show':'slds-hide'}">
+            <div class="slds-grid slds-grid_align-center">
+                <div class="slds-col slds-size_1-of-4"></div>
+                <div class="slds-col slds-size_2-of-4">
+                    <aura:if isTrue="{!item.contactoEncuesta.TS4_URLLogotipo__c != '' || !item.contactoEncuesta.TS4_URLLogotipo__c == null}">
+                        <div class="slds-m-top_small slds-align_absolute-center">
+                            <img src="{!item.contactoEncuesta.TS4_URLLogotipo__c}" alt="imgEmpresa" />
+                        </div> 
+                    </aura:if>
+                    <div class="slds-m-top_medium slds-align_absolute-center">
+                        <h1><b>¡Hola {!item.contacto.Name}!</b></h1>
+                    </div>
+                    <div class="slds-m-top_small slds-align_absolute-center">
+                        <span>Esta encuesta ya ha sido contestada anteriormente.</span>
+                    </div>
+                    <div class="slds-m-top_small slds-align_absolute-center">
+                        <h1><b>¡Gracias!</b></h1>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-4"></div>
+            </div>
+        </div>
+
+         
+    </aura:iteration>
+    
+    <div aura:id="finEncuesta" class="slds-hide">
+            <div class="slds-grid slds-grid_align-center">
+                <div class="slds-col slds-size_1-of-4"></div>
+                <div class="slds-col slds-size_2-of-4">
+                    
+                    <div class="slds-m-top_medium slds-align_absolute-center">
+                        <h1><b>¡Hola!</b></h1>
+                    </div>
+                    <div class="slds-m-top_small slds-align_absolute-center">
+                        <span>La fecha limite para realizar la encuesta se ha vencido.</span>
+                    </div>
+                    <div class="slds-m-top_small slds-align_absolute-center">
+                        <h1><b>¡Gracias!</b></h1>
+                    </div>
+                </div>
+                <div class="slds-col slds-size_1-of-4"></div>
+            </div>
+        </div>
+</aura:component>

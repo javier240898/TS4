@@ -1,0 +1,77 @@
+<aura:component implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction,lightning:actionOverride,forceCommunity:availableForAllPageTypes" access="global" controller="TS4_RegistrarNuevoCaso_CC">
+    <aura:attribute name="showModalCasos" type="boolean" default="false"/>
+    <aura:attribute name="NewCase" type="Map" default="{}"/>
+    <aura:attribute name="contactId" type="Id"/>	
+    <aura:attribute name="asunto" type="String"/>
+    <aura:attribute name="showButtonRegister" type="boolean" default="true"/>
+    <!--Atributos para la carga de archivos-->
+    <aura:attribute name="showLoadingSpinner" type="boolean" default="false" />
+    <aura:attribute name="fileName" type="String" default="Ningún archivo seleccionado.." />
+    <aura:attribute name="listaDocumentos" type="ContentDocument[]" />
+    <aura:attribute name="documentosList" type="String[]" />
+    <aura:attribute name="idFileType" type="string"/>
+    <!---->
+    <aura:attribute name="mensajeRequest" type="String" />
+    <aura:attribute name="showMessage" type="boolean" default="false"/>
+    <aura:attribute name="severityMessage" type="String" />
+    <aura:attribute name="titleMessage" type="String" />
+    <aura:attribute name="spinner" type="boolean" default="false"/>
+    
+    <aura:registerEvent name="cerrarModal" type="c:AMS_Event"></aura:registerEvent>
+    
+    <div class="slds-modal slds-fade-in-open slds-modal_medium">
+        <div class="slds-modal__container">
+			<aura:if isTrue="{!v.showMessage}">
+                <ui:message title="{!v.titleMessage}" severity="{!v.severityMessage}" closable="true">
+                    {!v.mensajeRequest}
+                </ui:message>
+            </aura:if>
+            
+            <div class="slds-modal__header">
+                <h1 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Nuevo caso</h1>
+            </div>
+            <div class="slds-modal__content" >
+                <aura:if isTrue="{!v.spinner}">  
+                    <lightning:spinner alternativeText="Loading.." title="Loading.." variant="base" size="large"/>                            
+                </aura:if> 
+                <div class="slds-p-bottom_medium">
+                    <div class="slds-p-around_large">
+                        <div class="slds-p-bottom_small">
+                            <div class="slds-col slds-size_1-of-1 slds-p-top_medium">
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_6-of-12">
+                                        <lightning:input aura:id="formCase" name="asunto" label="Asunto" variant="label-inline" required="true" value="{!v.NewCase.Asunto}"/>
+                                    </div>
+                                    <div class="slds-col slds-size_6-of-12 slds-p-left_small">
+                                        <lightning:input aura:id="fileId" onchange="{!c.handleFilesChange}" type="file" name="file" label="Evidencia del reporte" multiple="false" required="true"/>
+                                        <div class="slds-text-body_small slds-text-color_error">{!v.fileName} </div>
+                                        <aura:if isTrue="{!v.showLoadingSpinner}">
+                                            <div class="slds-text-body_small slds-text-color_error slds-p-bottom_small">Subiendo... 
+                                                <img src="/auraFW/resources/aura/images/spinner.gif" class="spinner-img" alt="Loading"/>'
+                                            </div>
+                                        </aura:if>
+                                    </div>
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_6-of-12">
+                                        <lightning:input aura:id="formCase" name="Desc Reporte" label="Descripción del reporte" variant="label-inline" required="true" value="{!v.NewCase.descReporte}"/>
+                                    </div>
+                                </div>
+                                <div class="slds-grid">
+                                    <div class="slds-col slds-size_6-of-12">
+                                        <lightning:input aura:id="formCase" name="Com Adic" label="Comentarios adicionales" variant="label-inline" required="true" value="{!v.NewCase.comAdicionales}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <footer class="slds-modal__footer">
+                <lightning:button class="slds-button slds-button_neutral" name="Cancelar" onclick="{!c.cancelarCasoModal}">Cancelar</lightning:button>
+                <lightning:button class="slds-button slds-button_brand" name="Guardar" onclick="{!c.guardarCaso}" disabled="{!if(v.showButtonRegister == false, 'true', '')}">Guardar</lightning:button>
+            </footer>
+        </div>
+    </div>
+    <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+</aura:component>

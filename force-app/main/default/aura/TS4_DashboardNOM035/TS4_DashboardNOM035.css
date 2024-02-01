@@ -1,0 +1,40 @@
+.THIS .slds-card-header{
+    font-size:24px;
+}
+
+.THIS .esGeneral .slds-text-heading_small{
+    font-size:23px;
+    background-color: green !important;
+}
+
+.THIS .ItemIconCard {
+    width:100%;
+    display: table;
+}
+
+.THIS .slds-align_absolute-center {
+    display: block;
+}
+
+
+.THIS .nom035-icon{
+    
+    width: 130px !important;
+    margin-right:auto;
+   
+}
+.THIS .nom035-td{
+    min-height:100px;
+}
+
+.THIS .wrapper .slds-grid {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   grid-column-gap: 10px;
+   
+}
+
+.THIS .esGeneral .slds-icon_small{
+    width: var(--lwc-squareIconLargeBoundary,3rem);
+    height: var(--lwc-squareIconLargeBoundary,3rem);
+}

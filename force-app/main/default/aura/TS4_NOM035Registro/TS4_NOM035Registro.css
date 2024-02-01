@@ -1,0 +1,15 @@
+.THIS 
+    .estiloBoton
+    {
+        background:#777777;
+        color:#FFFFFF;
+    	width:80px;
+    	height:40px;
+    	font-weight: bold;
+    }
+.THIS .slds-box
+    {
+    	border-collapse:collapse;
+    	border-radius:1px;
+    	border-color:white;
+    }

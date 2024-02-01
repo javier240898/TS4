@@ -1,0 +1,64 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="AMS_HomeController">
+    <aura:attribute name="showModalCasos" type="boolean" default="false"/>
+    <aura:attribute name="showModalHistorial" type="boolean" default="false"/>
+    
+    <aura:attribute name="contactID" type="String" default="vacio"/>
+    <aura:attribute name="accountID" type="String" default=""/>
+    <aura:attribute name="currentContractId" type="String" default="vacio"/>
+    <aura:attribute name="currentContractHistory" type="List" default="{}" />    
+    
+    <aura:handler event="c:AMS_Event" action="{!c.cancelarCaso}" name="cerrarModal"></aura:handler>
+    <aura:handler event="c:AMS_Event" action="{!c.cancelarHistorial}" name="cerrarModalHistorial"></aura:handler>
+    <aura:handler event="c:AMS_EventDetail" action="{!c.actualizaCurrentIDHome}" name="consultaDetail"></aura:handler>
+
+    
+    <aura:registerEvent name="EventDetail" type="c:AMS_EventDetail"></aura:registerEvent>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <a href="#" class="slds-assistive-text slds-assistive-text_focus">Skip to Navigation</a>
+    <a href="#" class="slds-assistive-text slds-assistive-text_focus">Skip to Main Content</a>
+    <div class="slds-global-header slds-grid slds-grid_align-spread">
+        <div class="slds-global-header__item">
+            <img src="{!$Resource.LogoTS4}" width="100"></img>
+        </div>
+        <div class="slds-global-header__item">
+            <ul class="slds-global-actions">
+                <li class="slds-global-actions__item">
+                    <div class="slds-dropdown-trigger slds-dropdown-trigger_click">
+                        <lightning:button label="Crear un caso nuevo" iconName="utility:case" iconPosition="left"  variant="brand" onclick="{!c.abrirModalCasos}"/>
+                    </div>
+                </li>
+                <li class="slds-global-actions__item">
+                    <div class="slds-dropdown-trigger slds-dropdown-trigger_click">
+                        <button class="slds-button slds-global-actions__avatar slds-global-actions__item-action" title="person name" aria-haspopup="true">
+                            <span class="slds-avatar slds-avatar_circle slds-avatar_medium">
+                                <img alt="Person name" src="https://www.lightningdesignsystem.com/assets/images/avatar2.jpg" title="User avatar" />
+                            </span>
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="slds-container" style="padding:20px 15px 0px 15px">
+        <aura:if isTrue="{!v.currentContractId=='vacio'?false:true}">
+            <c:AMS_ServiceContractDetail contractID="{!v.currentContractId}" contactID="{!v.contactID}" aura:id="ServiceContractDetail"/>
+        </aura:if>
+    </div>
+   
+    <div class="slds-p-around_medium" style="background-color: white">
+        <div class="slds-docked-form-footer stickyFooter bottomfooter">
+            <div class="slds-media__body slds-section__title slds-p-left_medium">
+                <a href="javascript:void(0)" onclick="{!c.abrirModalHistorial}" style="width: 50%;align-content: center;color: black;text-decoration-line: underline;">
+                    Historial de Contratos de Servicio {!v.currentContractHistory}
+                </a>
+                
+            </div>
+        </div>
+    </div>
+    <aura:if isTrue="{!v.showModalCasos}">
+        <c:TS4_CrearNuevoCaso contactId='{!v.contactID}' ></c:TS4_CrearNuevoCaso>
+    </aura:if>
+    <aura:if isTrue="{!v.showModalHistorial}">
+        <c:AMS_HistorialContratos history="{!v.currentContractHistory}"/>
+    </aura:if>
+</aura:component>

@@ -1,0 +1,11 @@
+<aura:component controller="TS4_NextButtonController" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+
+    <aura:attribute name="idUnidad" type="String"/>
+    <aura:attribute name="recordId" type="String"/>
+    <aura:attribute name="subunidades" type="String"/>
+    <div class="slds-form-element buttons slds-text-align_center">
+        <!--lightning:button  variant="brand" aura:id="prevPage" label="Anterior" onclick="{!c.handlePrev}" /-->            
+        <lightning:button  aura:id="nextPage" variant="brand" label="Siguiente" onclick="{!c.getSubunidades}"/>
+    </div>
+
+</aura:component>
